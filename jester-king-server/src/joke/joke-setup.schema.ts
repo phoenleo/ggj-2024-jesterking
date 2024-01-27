@@ -15,4 +15,4 @@ export class JokeSetup {
   category: string;
 }
 
-export const JokeSetupSchema = SchemaFactory.createForClass(JokeSetup)
+export const JokeSetupSchema = SchemaFactory.createForClass(JokeSetup);

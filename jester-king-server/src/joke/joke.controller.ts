@@ -6,12 +6,12 @@ export class JokeController {
   constructor(private readonly jokeService: JokeService) {}
 
   @Get('random-setup')
-  getRandomSetup() {
-    return this.jokeService.getRandomJokeSetup();
+  async getRandomSetup() {
+    return await this.jokeService.getRandomJokeSetup();
   }
 
   @Get('random-punchline')
-  getRandomPunchline() {
-    return this.jokeService.getRandomJokePunchline();
+  async getRandomPunchlines() {
+    return await this.jokeService.getRandomJokePunchlines();
   }
 }

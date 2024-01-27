@@ -16,5 +16,6 @@ import { JokePunchline, JokePunchlineSchema } from './joke-punchline.schema';
   ],
   controllers: [JokeController],
   providers: [JokeService],
+  exports: [JokeService],
 })
 export class JokeModule {}

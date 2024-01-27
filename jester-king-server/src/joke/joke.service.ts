@@ -27,13 +27,18 @@ export class JokeService {
     return await this.findOneJokeSetup(aggregateResult[0]);
   }
 
+  async getRandomJokeSetupAsValue() {
+    const result = await this.getRandomJokeSetup();
+    return result.value;
+  }
+
   async findOneJokeSetup(id: string) {
     return await this.jokeSetupModel.findById(id);
   }
 
   // JOKE PUNCHLINE ----------------------------
 
-  async getRandomJokePunchline() {
+  async getRandomJokePunchlines() {
     const PUNCHLINE_OPTION_COUNT = +this.configService.get(
       'PUNCHLINE_OPTION_COUNT',
     );
@@ -43,5 +48,10 @@ export class JokeService {
     ]);
 
     return await aggregateResult;
+  }
+
+  async getRandomJokePunchlinesAsValue() {
+    const result = await this.getRandomJokePunchlines()
+    return result.map((e) => e.value);
   }
 }
