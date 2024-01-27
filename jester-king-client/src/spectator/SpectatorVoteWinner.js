@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
+import Button from 'react-bootstrap/Button';
 
 function SpectatorVoteWinner() {
   let { sessionId } = useParams()
@@ -13,9 +14,9 @@ function SpectatorVoteWinner() {
         <li>Sampah Masyarakat - 70 - (Si A))</li>
       </ul>
 
-      <button type='button' onClick={gotoNewSession}>
+      <Button variant='primary' size='lg' onClick={gotoNewSession}>
         New Session
-      </button>
+      </Button>
     </div>
   )
 }

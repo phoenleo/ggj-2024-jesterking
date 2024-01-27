@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
 
 function ShowVoteResult() {
   const [showResult, setShowResult] = useState(false)
@@ -21,14 +22,14 @@ function ShowVoteResult() {
       {
         !showResult ?
         (
-          <button id='showVoteResult' type='button' onClick={() => setShowResult(true)}>
+          <Button id='showVoteResult' variant='primary' size='lg' onClick={() => setShowResult(true)}>
             Show Vote Result
-          </button>
+          </Button>
         ) :
         (
-          <button id='next' type='button' onClick={gotoVoteWinner}>
+          <Button id='next' variant='primary' size='lg' onClick={gotoVoteWinner}>
             Next
-          </button>
+          </Button>
         )
       }
     </div>

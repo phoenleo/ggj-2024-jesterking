@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
+import Button from 'react-bootstrap/Button';
 
 function Register() {
   let { sessionId } = useParams()
@@ -10,9 +11,9 @@ function Register() {
       <p>Session: {sessionId}</p>
       <p>Player Register</p>
       <p>Enter Name</p>
-      <button type='button' onClick={gotoWaitingPlayer}>
+      <Button variant="primary" size="lg" onClick={gotoWaitingPlayer}>
         Submit
-      </button>
+      </Button>
     </div>
   )
 }

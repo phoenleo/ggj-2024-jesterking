@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 function WaitingPlayer() {
   let { sessionId } = useParams()
@@ -10,9 +11,9 @@ function WaitingPlayer() {
     <div>
       <p>Session: {sessionId}</p>
       <p>Waiting Other Player</p>
-      <button type='button' onClick={gotoSubmitPunchline}>
+      <Button variant='primary' size='lg' onClick={gotoSubmitPunchline}>
         Refresh
-      </button>
+      </Button>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 function SubmitVote() {
   let { sessionId } = useParams()
@@ -18,9 +19,9 @@ function SubmitVote() {
       <label for="p_2">Idol</label>
       <br />
       
-      <button type='button' onClick={gotoWaitingVoters}>
+      <Button variant='primary' size='lg' onClick={gotoWaitingVoters}>
         Submit
-      </button>
+      </Button>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 function VoteWinner() {
   let { sessionId } = useParams()
@@ -14,9 +15,9 @@ function VoteWinner() {
         <li>Sampah Masyarakat - Si A - 100</li>
       </ul>
       
-      <button type='button' onClick={gotoNewSession}>
+      <Button variant='primary' size='lg' onClick={gotoNewSession}>
         New Session
-      </button>
+      </Button>
     </div>
   )
 }

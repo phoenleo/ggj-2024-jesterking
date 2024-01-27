@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
+import Button from 'react-bootstrap/Button';
 
 function FinishSubmit() {
   let { sessionId } = useParams()
@@ -15,9 +16,9 @@ function FinishSubmit() {
         <li>Sampah Masyarakat</li>
       </ul>
 
-      <button type='button' onClick={gotoNewSession}>
+      <Button variant="primary" size="lg" onClick={gotoNewSession}>
         New Session
-      </button>
+      </Button>
     </div>
   )
 }
