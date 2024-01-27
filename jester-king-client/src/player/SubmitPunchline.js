@@ -1,8 +1,10 @@
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 function SubmitPunchline() {
@@ -24,56 +26,30 @@ function SubmitPunchline() {
         </Card.Body>
       </Card>
 
-      {/* Punchlines */}
-      <Card bg="success" text={"success" === 'light' ? 'dark' : 'white'}>
-        <Card.Body>
-          <Card.Text>
-            Sampah Masyarakat
-          </Card.Text>
-        </Card.Body>
-      </Card>
-
-      <Card bg="success" text={"success" === 'light' ? 'dark' : 'white'}>
-        <Card.Body>
-          <Card.Text>
-            Idol
-          </Card.Text>
-        </Card.Body>
-      </Card>
-
-      <Button variant="success" size="lg" onClick={gotoFinishSubmit}>
-        Tukang Bangunan
-      </Button>
-
-
-      <Form>
-        <Form.Check
-          type="radio"
-          id="p_1"
-          name="punchline"
-          value="Sampah Masyarakat"
-          label="Sampah Masyarakat"
-        />
-        <Form.Check
-          type="radio"
-          id="p_2"
-          name="punchline"
-          value="Idol"
-          label="Idol"
-        />
-        <Form.Check
-          type="radio"
-          id="p_3"
-          name="punchline"
-          value="Tukang Bangunan"
-          label="Tukang Bangunan"
-        />
-      </Form>
+      <Container>
+        <Row>
+          <Col>
+            <Button variant="success" size="lg" onClick={gotoFinishSubmit}>
+              Sampah Masyarakat
+            </Button>
+          </Col>
+          <Col>
+            <Button variant="success" size="lg" onClick={gotoFinishSubmit}>
+              Idol
+            </Button>
+          </Col>
+          <Col>
+            <Button variant="success" size="lg" onClick={gotoFinishSubmit}>
+              Tukang Bangunan
+            </Button>
+          </Col>
+        </Row>
+      </Container>
       <br />
-
-      <Button variant="primary" size="lg" onClick={gotoFinishSubmit}>
+      <Button variant="danger" size="lg" onClick={gotoFinishSubmit}>
         Submit
       </Button>
+
     </div>
   )
 }

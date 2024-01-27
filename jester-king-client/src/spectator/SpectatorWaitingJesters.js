@@ -11,7 +11,7 @@ function SpectatorWaitingJesters() {
       <p>Session: {sessionId}</p>
       <p>JOKE SETUP: Cita cita ___</p>
       <p>Waiting Jesters ...</p>
-      <Button variant='primary' size='lg' onClick={gotoWaitingVoters}>
+      <Button variant='danger' size='lg' onClick={gotoWaitingVoters}>
         Refresh
       </Button>
     </div>

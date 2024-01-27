@@ -10,7 +10,7 @@ function WaitingVoters() {
     <div>
       <p>Session: {sessionId}</p>
       <p>Waiting Voters</p>
-      <Button variant='primary' size='lg' onClick={gotoVoteResult}>
+      <Button variant='danger' size='lg' onClick={gotoVoteResult}>
         Refresh
       </Button>
     </div>
