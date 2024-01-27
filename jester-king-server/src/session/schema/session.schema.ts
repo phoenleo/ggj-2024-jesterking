@@ -33,5 +33,4 @@ export class Session {
   isCompleted: boolean;
 }
 
-export const SessionSchema = SchemaFactory.createForClass(Session)
-
+export const SessionSchema = SchemaFactory.createForClass(Session);

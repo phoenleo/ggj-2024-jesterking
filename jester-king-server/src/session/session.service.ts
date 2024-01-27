@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Model } from 'mongoose';
 import { CreateSessionDto } from './dto/create-session.dto';
 import { UpdateSessionDto } from './dto/update-session.dto';
@@ -101,7 +105,7 @@ export class SessionService {
     const player = this.getPlayer(session, playerId);
 
     if (!player.punchlineOptions.includes(punchline)) {
-      throw new BadRequestException('Punchline not in options')
+      throw new BadRequestException('Punchline not in options');
     }
 
     player.selectedPunchline = punchline;

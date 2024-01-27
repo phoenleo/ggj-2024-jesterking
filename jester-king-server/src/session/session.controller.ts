@@ -33,7 +33,6 @@ export class SessionController {
     return await this.sessionService.findOneActiveSession(sessionCode);
   }
 
-
   @Patch(':sessionCode/player/:playerId/register')
   async registerPlayer(
     @Param('sessionCode') sessionCode: string,

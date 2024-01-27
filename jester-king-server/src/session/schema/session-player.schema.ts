@@ -20,5 +20,4 @@ export class SessionPlayer {
   voteCount: number;
 }
 
-export const SessionPlayerSchema = SchemaFactory.createForClass(SessionPlayer)
-
+export const SessionPlayerSchema = SchemaFactory.createForClass(SessionPlayer);
