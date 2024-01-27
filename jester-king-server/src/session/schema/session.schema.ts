@@ -22,6 +22,9 @@ export class Session {
 
   @Prop()
   winner: string;
+
+  @Prop({ default: false })
+  isCompleted: boolean;
 }
 
 export const SessionSchema = SchemaFactory.createForClass(Session)

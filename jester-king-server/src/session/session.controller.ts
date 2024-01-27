@@ -8,8 +8,8 @@ export class SessionController {
   constructor(private readonly sessionService: SessionService) {}
 
   @Post()
-  create(@Body() createSessionDto: CreateSessionDto) {
-    return this.sessionService.create(createSessionDto);
+  async create(@Body() createSessionDto: CreateSessionDto) {
+    return await this.sessionService.create(createSessionDto);
   }
 
   @Get()
@@ -17,9 +17,9 @@ export class SessionController {
     return this.sessionService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.sessionService.findOne(+id);
+  @Get(':sessionCode')
+  async findOne(@Param('sessionCode') sessionCode: string) {
+    return await this.sessionService.findOne(sessionCode);
   }
 
   @Patch(':id')

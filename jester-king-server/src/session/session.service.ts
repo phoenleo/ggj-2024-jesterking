@@ -5,12 +5,13 @@ import { UpdateSessionDto } from './dto/update-session.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Session } from './schema/session.schema';
 import { JokeService } from 'src/joke/joke.service';
+import { isContext } from 'vm';
 
 @Injectable()
 export class SessionService {
   constructor(
     @InjectModel(Session.name) private sessionModel: Model<Session>,
-    private jokeService: JokeService
+    private jokeService: JokeService,
   ) {}
 
   async create(createSessionDto: CreateSessionDto) {
@@ -22,8 +23,10 @@ export class SessionService {
 
     const sessionCode = createRandomSessionCode();
     const jokeSetup = await this.jokeService.getRandomJokeSetupAsValue();
-    const player1_punchlineOptions = await this.jokeService.getRandomJokePunchlinesAsValue();
-    const player2_punchlineOptions = await this.jokeService.getRandomJokePunchlinesAsValue();
+    const player1_punchlineOptions =
+      await this.jokeService.getRandomJokePunchlinesAsValue();
+    const player2_punchlineOptions =
+      await this.jokeService.getRandomJokePunchlinesAsValue();
 
     return await this.sessionModel.create({
       sessionCode,
@@ -41,8 +44,12 @@ export class SessionService {
     return `This action returns all session`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} session`;
+  async findOne(sessionCode: string) {
+    console.log(`finding... ${sessionCode}`);
+    return await this.sessionModel.findOne({
+      sessionCode,
+      $or: [{ isCompleted: { $exists: false } }, { isCompleted: false }],
+    });
   }
 
   update(id: number, updateSessionDto: UpdateSessionDto) {
