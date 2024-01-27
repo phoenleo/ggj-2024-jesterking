@@ -16,7 +16,7 @@ function FinishSubmit() {
         <li>Sampah Masyarakat</li>
       </ul>
 
-      <Button variant="primary" size="lg" onClick={gotoNewSession}>
+      <Button variant="danger" size="lg" onClick={gotoNewSession}>
         New Session
       </Button>
     </div>

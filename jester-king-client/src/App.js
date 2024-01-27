@@ -50,19 +50,19 @@ function App() {
       </Form>
       <br />
 
-      <Button variant="primary" size="lg" onClick={gotoPlayer}>
+      <Button variant="danger" size="lg" onClick={gotoPlayer}>
         Join As Player
       </Button>
       <br />
       <br />
 
-      <Button variant="primary" size="lg" onClick={gotoVoter}>
+      <Button variant="danger" size="lg" onClick={gotoVoter}>
         Join As Voter
       </Button>
       <br />
       <br />
-
-      <Button variant="primary" size="lg" onClick={createNewSession}>
+      
+      <Button variant="danger" size="lg" onClick={createNewSession}>
         Create New Session
       </Button>
     </div>

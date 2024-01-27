@@ -19,7 +19,7 @@ function SubmitVote() {
       <label for="p_2">Idol</label>
       <br />
       
-      <Button variant='primary' size='lg' onClick={gotoWaitingVoters}>
+      <Button variant='danger' size='lg' onClick={gotoWaitingVoters}>
         Submit
       </Button>
     </div>

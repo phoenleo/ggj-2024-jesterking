@@ -10,7 +10,7 @@ function WaitingJesters() {
     <div>
       <p>Session: {sessionId}</p>
       <p>Waiting Jesters</p>
-      <Button variant='primary' size='lg' onClick={gotoSubmitVote}>
+      <Button variant='danger' size='lg' onClick={gotoSubmitVote}>
         Refresh
       </Button>
     </div>

@@ -16,7 +16,7 @@ function VoteResult() {
         <li>Idol - Si B - 30</li>
       </ul>
       
-      <Button variant='primary' size='lg' onClick={gotoVoteWinner}>
+      <Button variant='danger' size='lg' onClick={gotoVoteWinner}>
         Next
       </Button>
     </div>

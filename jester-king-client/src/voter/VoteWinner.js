@@ -15,7 +15,7 @@ function VoteWinner() {
         <li>Sampah Masyarakat - Si A - 100</li>
       </ul>
       
-      <Button variant='primary' size='lg' onClick={gotoNewSession}>
+      <Button variant='danger' size='lg' onClick={gotoNewSession}>
         New Session
       </Button>
     </div>

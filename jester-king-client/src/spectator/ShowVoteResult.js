@@ -22,12 +22,12 @@ function ShowVoteResult() {
       {
         !showResult ?
         (
-          <Button id='showVoteResult' variant='primary' size='lg' onClick={() => setShowResult(true)}>
+          <Button id='showVoteResult' variant='danger' size='lg' onClick={() => setShowResult(true)}>
             Show Vote Result
           </Button>
         ) :
         (
-          <Button id='next' variant='primary' size='lg' onClick={gotoVoteWinner}>
+          <Button id='next' variant='danger' size='lg' onClick={gotoVoteWinner}>
             Next
           </Button>
         )
