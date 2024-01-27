@@ -11,12 +11,17 @@ import SubmitVote from "./voter/SubmitVote";
 import WaitingVoters from "./voter/WaitingVoters";
 import VoteResult from "./voter/VoteResult";
 import VoteWinner from "./voter/VoteWinner";
+import CreateSession from "./CreateSession";
 
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: 'create-session',
+    element: <CreateSession />
   },
 
   // Session/

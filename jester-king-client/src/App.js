@@ -7,7 +7,7 @@ function App() {
   const navigate = useNavigate();
   const gotoPlayer = () => navigate(`../session/${sessionId}/player/register`)
   const gotoVoter = () => navigate(`../session/${sessionId}/voter/waiting-jesters`)
-  const createNewSession = () => navigate(`../session/${sessionId}/spectator/new-session`)
+  const createNewSession = () => navigate(`/create-session`)
 
 
   const [isLoading, setLoading] = useState(false);
