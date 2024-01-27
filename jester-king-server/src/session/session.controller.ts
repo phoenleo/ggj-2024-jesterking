@@ -26,14 +26,29 @@ export class SessionController {
     return await this.sessionService.findOneActiveSession(sessionCode);
   }
 
-  @Patch(':sessionCode/player/register')
+  @Patch(':sessionCode/player/:playerId/register')
   async registerPlayer(
     @Param('sessionCode') sessionCode: string,
+    @Param('playerId') playerId: string,
     @Body() registerPlayerDto: RegisterPlayerDto,
   ) {
     return await this.sessionService.registerPlayer(
       sessionCode,
+      playerId,
       registerPlayerDto,
+    );
+  }
+
+  @Patch(':sessionCode/player/:playerId/submit-punchline')
+  async playerSubmitPunchline(
+    @Param('sessionCode') sessionCode: string,
+    @Param('playerId') playerId: string,
+    @Body('punchline') punchline: string,
+  ) {
+    return await this.sessionService.playerSubmitPunchline(
+      sessionCode,
+      playerId,
+      punchline,
     );
   }
 }

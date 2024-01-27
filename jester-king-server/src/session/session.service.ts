@@ -1,9 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { CreateSessionDto } from './dto/create-session.dto';
 import { UpdateSessionDto } from './dto/update-session.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { Session } from './schema/session.schema';
+import { Session, SessionDocument } from './schema/session.schema';
 import { JokeService } from 'src/joke/joke.service';
 import { isContext } from 'vm';
 import { RegisterPlayerDto } from './dto/register-player.dto';
@@ -42,33 +42,57 @@ export class SessionService {
   }
 
   async findOneActiveSession(sessionCode: string) {
-    console.log(`finding... ${sessionCode}`);
-    return await this.sessionModel.findOne({
+    const res = await this.sessionModel.findOne({
       sessionCode,
       $or: [{ isCompleted: { $exists: false } }, { isCompleted: false }],
     });
+
+    if (!res) {
+      throw new NotFoundException('Session not found');
+    }
+
+    return res;
   }
 
   async registerPlayer(
     sessionCode: string,
+    playerId: string,
     registerPlayerDto: RegisterPlayerDto,
   ) {
     const session = await this.findOneActiveSession(sessionCode);
+    const player = this.getPlayer(session, playerId);
 
-    if (!session) {
-      throw new NotFoundException('Session not found');
-    }
+    player.name = registerPlayerDto.name;
 
-    const isPlayer1 = session.player1._id.equals(registerPlayerDto.playerId);
-    const isPlayer2 = session.player2._id.equals(registerPlayerDto.playerId);
+    await session.save();
+    return session;
+  }
+
+  private getPlayer(session: SessionDocument, playerId: string) {
+    const isPlayer1 = session.player1._id.equals(playerId);
+    const isPlayer2 = session.player2._id.equals(playerId);
 
     if (!isPlayer1 && !isPlayer2) {
       throw new NotFoundException('Players not found');
     }
 
-    const player = isPlayer1 ? session.player1 : session.player2;
+    return isPlayer1 ? session.player1 : session.player2;
+  }
 
-    player.name = registerPlayerDto.name;
+
+  async playerSubmitPunchline(
+    sessionCode: string,
+    playerId: string,
+    punchline: string,
+  ) {
+    const session = await this.findOneActiveSession(sessionCode);
+    const player = this.getPlayer(session, playerId);
+
+    if (!player.punchlineOptions.includes(punchline)) {
+      throw new BadRequestException('Punchline not in options')
+    }
+
+    player.selectedPunchline = punchline;
 
     await session.save();
     return session;
