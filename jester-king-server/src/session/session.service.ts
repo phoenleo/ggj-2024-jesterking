@@ -54,6 +54,19 @@ export class SessionService {
     return res;
   }
 
+  async findOneCompletedSession(sessionCode: string) {
+    const res = await this.sessionModel.findOne({
+      sessionCode,
+      isCompleted: true,
+    });
+
+    if (!res) {
+      throw new NotFoundException('Session not found');
+    }
+
+    return res;
+  }
+
   async registerPlayer(
     sessionCode: string,
     playerId: string,
@@ -79,7 +92,6 @@ export class SessionService {
     return isPlayer1 ? session.player1 : session.player2;
   }
 
-
   async playerSubmitPunchline(
     sessionCode: string,
     playerId: string,
@@ -93,6 +105,14 @@ export class SessionService {
     }
 
     player.selectedPunchline = punchline;
+
+    if (
+      session.player1.selectedPunchline &&
+      session.player2.selectedPunchline
+    ) {
+      session.isBothPlayerSubmitted = true;
+      session.canVote = true;
+    }
 
     await session.save();
     return session;

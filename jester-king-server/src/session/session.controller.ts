@@ -6,10 +6,10 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { SessionService } from './session.service';
 import { CreateSessionDto } from './dto/create-session.dto';
-import { UpdateSessionDto } from './dto/update-session.dto';
 import { RegisterPlayerDto } from './dto/register-player.dto';
 
 @Controller('session')
@@ -22,9 +22,17 @@ export class SessionController {
   }
 
   @Get(':sessionCode')
-  async findOneActiveSession(@Param('sessionCode') sessionCode: string) {
+  async findOneActiveSession(
+    @Param('sessionCode') sessionCode: string,
+    @Query('completed') isCompleted: boolean,
+  ) {
+    if (isCompleted) {
+      return await this.sessionService.findOneCompletedSession(sessionCode);
+    }
+
     return await this.sessionService.findOneActiveSession(sessionCode);
   }
+
 
   @Patch(':sessionCode/player/:playerId/register')
   async registerPlayer(

@@ -8,7 +8,7 @@ export type SessionDocument = HydratedDocument<Session>;
   timestamps: true,
 })
 export class Session {
-  @Prop()
+  @Prop({ index: true })
   sessionCode: string;
 
   @Prop()
@@ -24,7 +24,14 @@ export class Session {
   winner: string;
 
   @Prop({ default: false })
+  isBothPlayerSubmitted: boolean;
+
+  @Prop({ default: false })
+  canVote: boolean;
+
+  @Prop({ default: false })
   isCompleted: boolean;
 }
 
 export const SessionSchema = SchemaFactory.createForClass(Session)
+
