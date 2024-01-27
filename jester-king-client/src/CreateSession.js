@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import Button from 'react-bootstrap/Button'
 
 function CreateSession() {
   const [sessionId, setSessionId] = useState([]);
@@ -24,9 +25,9 @@ function CreateSession() {
     <div>
       <h1>Session Created: {sessionId}</h1>
       
-      <button type='button' onClick={gotoSpectator}>
+      <Button variant='primary' size='lg' onClick={gotoSpectator}>
         Next
-      </button>
+      </Button>
     </div>
 
   )

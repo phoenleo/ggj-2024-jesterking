@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
 
 function WaitingVoters() {
   let { sessionId } = useParams()
@@ -9,9 +10,9 @@ function WaitingVoters() {
     <div>
       <p>Session: {sessionId}</p>
       <p>Waiting Voters</p>
-      <button type='button' onClick={gotoVoteResult}>
+      <Button variant='primary' size='lg' onClick={gotoVoteResult}>
         Refresh
-      </button>
+      </Button>
     </div>
   )
 }

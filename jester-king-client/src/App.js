@@ -1,63 +1,70 @@
-import './App.css';
-import { useEffect, useState } from 'react'
-import axios from "axios"
+import './App.scss';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
 
 function App() {
   const navigate = useNavigate();
-  const gotoPlayer = () => navigate(`../session/${sessionId}/player/register`)
-  const gotoVoter = () => navigate(`../session/${sessionId}/voter/waiting-jesters`)
-  const createNewSession = () => navigate(`/create-session`)
 
+  const gotoPlayer = () => navigate(`../session/${sessionId}/player/register`);
+  const gotoVoter = () => navigate(`../session/${sessionId}/voter/waiting-jesters`);
+  const createNewSession = () => navigate(`/create-session`);
 
   const [isLoading, setLoading] = useState(false);
   const [title, setTitle] = useState([]);
   const [sessionId, setSessionId] = useState([]);
 
   useEffect(() => {
-    const asyncLoadTitle = async() => {
-      setLoading(true)
-      const response = await axios.get('http://localhost:3000/api')
-      setTitle(response.data)
-      setLoading(false) 
-    }
+    const asyncLoadTitle = async () => {
+      setLoading(true);
+      const response = await axios.get('http://localhost:3000/api');
+      setTitle(response.data);
+      setLoading(false);
+    };
 
-    asyncLoadTitle()
-  }, [])
-
+    asyncLoadTitle();
+  }, []);
 
   return (
     <div className="App">
       {/* Title */}
       {isLoading ? (
         <h1>Loading ...</h1>
-      ): (
+      ) : (
         <h1>{title}</h1>
       )}
 
       <h2>Enter Session Code</h2>
-      <form>
-        <input 
-          type="text" 
-          value={sessionId} 
-          placeholder='session code' 
-          onChange={e => setSessionId(e.target.value)}
+      <Form className="centered-form">
+        <Form.Control
+          size="lg"
+          type="text"
+          placeholder="session code"
+          value={sessionId}
+          onChange={(e) => setSessionId(e.target.value)}
+          style={{ width: '150px' }}
         />
-      </form>
+      </Form>
+      <br />
 
-      <button type='button' onClick={gotoPlayer}>
+      <Button variant="primary" size="lg" onClick={gotoPlayer}>
         Join As Player
-      </button>
+      </Button>
+      <br />
       <br />
 
-      <button type='button' onClick={gotoVoter}>
+      <Button variant="primary" size="lg" onClick={gotoVoter}>
         Join As Voter
-      </button>
+      </Button>
       <br />
-      
-      <button type='button' onClick={createNewSession}>
+      <br />
+
+      <Button variant="primary" size="lg" onClick={createNewSession}>
         Create New Session
-      </button>
+      </Button>
     </div>
   );
 }
