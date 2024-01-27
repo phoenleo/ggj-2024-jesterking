@@ -135,4 +135,14 @@ export class SessionService {
     await session.save();
     return session;
   }
+
+  async closeSession(sessionCode: string) {
+    const session = await this.findOneActiveSession(sessionCode);
+
+    session.canVote = false;
+    session.isCompleted = true;
+
+    await session.save();
+    return session;
+  }
 }

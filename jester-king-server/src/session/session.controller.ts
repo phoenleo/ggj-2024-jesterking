@@ -66,4 +66,9 @@ export class SessionController {
   ) {
     return await this.sessionService.submitVote(sessionCode, votedPlayerId);
   }
+
+  @Patch(':sessionCode/close')
+  async closeSession(@Param('sessionCode') sessionCode: string) {
+    return this.sessionService.closeSession(sessionCode);
+  }
 }
