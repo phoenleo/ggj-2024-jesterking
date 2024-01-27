@@ -12,6 +12,10 @@ import WaitingVoters from "./voter/WaitingVoters";
 import VoteResult from "./voter/VoteResult";
 import VoteWinner from "./voter/VoteWinner";
 import CreateSession from "./CreateSession";
+import SpectatorWaitingJesters from "./spectator/SpectatorWaitingJesters";
+import SpectatorWaitingVoters from "./spectator/SpectatorWaitingVoters copy";
+import ShowVoteResult from "./spectator/ShowVoteResult";
+import SpectatorVoteWinner from "./spectator/SpectatorVoteWinner";
 
 
 const routes = createBrowserRouter([
@@ -75,6 +79,29 @@ const routes = createBrowserRouter([
           {
             path: "vote-winner",
             element: <VoteWinner />
+          },
+        ]
+      },
+
+      // Spectator/...
+      {
+        path: "spectator",
+        children: [
+          {
+            path: "waiting-jesters",
+            element: <SpectatorWaitingJesters />
+          },
+          {
+            path: "waiting-voters",
+            element: <SpectatorWaitingVoters />
+          },
+          {
+            path: "show-vote-result",
+            element: <ShowVoteResult />
+          },
+          {
+            path: "vote-winner",
+            element: <SpectatorVoteWinner />
           },
         ]
       }
