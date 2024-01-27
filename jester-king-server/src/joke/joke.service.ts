@@ -1,34 +1,47 @@
 import { Injectable } from '@nestjs/common';
-import { CreateJokeDto } from './dto/create-joke.dto';
-import { UpdateJokeDto } from './dto/update-joke.dto';
+import { Model } from 'mongoose';
+import { JokeSetup } from './joke-setup.schema';
+import { JokePunchline } from './joke-punchline.schema';
+import { InjectModel } from '@nestjs/mongoose';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class JokeService {
-  create(createJokeDto: CreateJokeDto) {
-    return 'This action adds a new joke';
+  constructor(
+    private configService: ConfigService,
+    @InjectModel(JokeSetup.name) private jokeSetupModel: Model<JokeSetup>,
+    @InjectModel(JokePunchline.name)
+    private jokePunchlineModel: Model<JokePunchline>,
+  ) {}
+
+  // JOKE PUNCHLINE ----------------------------
+
+  async getRandomJokeSetup() {
+    const SETUP_COUNT = +this.configService.get('SETUP_COUNT');
+    const aggregateResult = await this.jokeSetupModel.aggregate([
+      { $match: { deletedAt: null } },
+      { $sample: { size: SETUP_COUNT } },
+      { $project: { _id: 1 } },
+    ]);
+
+    return await this.findOneJokeSetup(aggregateResult[0]);
   }
 
-  findAll() {
-    return `This action returns all joke`;
+  async findOneJokeSetup(id: string) {
+    return await this.jokeSetupModel.findById(id);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} joke`;
-  }
+  // JOKE PUNCHLINE ----------------------------
 
-  update(id: number, updateJokeDto: UpdateJokeDto) {
-    return `This action updates a #${id} joke`;
-  }
+  async getRandomJokePunchline() {
+    const PUNCHLINE_OPTION_COUNT = +this.configService.get(
+      'PUNCHLINE_OPTION_COUNT',
+    );
+    const aggregateResult = await this.jokePunchlineModel.aggregate([
+      { $match: { deletedAt: null } },
+      { $sample: { size: PUNCHLINE_OPTION_COUNT } },
+    ]);
 
-  remove(id: number) {
-    return `This action removes a #${id} joke`;
-  }
-
-  getRandomJokeSetup() {
-    return 'Joke Setup';
-  }
-
-  getRandomJokePunchline() {
-    return 'Joke Punchline';
+    return await aggregateResult;
   }
 }
