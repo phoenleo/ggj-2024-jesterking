@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 function ShowVoteResult() {
   const [showResult, setShowResult] = useState(false)
