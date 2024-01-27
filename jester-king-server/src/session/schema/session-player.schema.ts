@@ -1,12 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Types } from 'mongoose';
 
 export type SessionPlayerDocument = HydratedDocument<SessionPlayer>;
 
-@Schema({
-  _id: false,
-})
+@Schema()
 export class SessionPlayer {
+  _id: Types.ObjectId;
+
   @Prop({ default: '' })
   name: string;
 

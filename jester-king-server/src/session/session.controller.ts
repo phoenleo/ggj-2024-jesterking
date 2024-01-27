@@ -1,7 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { SessionService } from './session.service';
 import { CreateSessionDto } from './dto/create-session.dto';
 import { UpdateSessionDto } from './dto/update-session.dto';
+import { RegisterPlayerDto } from './dto/register-player.dto';
 
 @Controller('session')
 export class SessionController {
@@ -12,23 +21,19 @@ export class SessionController {
     return await this.sessionService.create(createSessionDto);
   }
 
-  @Get()
-  findAll() {
-    return this.sessionService.findAll();
-  }
-
   @Get(':sessionCode')
-  async findOne(@Param('sessionCode') sessionCode: string) {
-    return await this.sessionService.findOne(sessionCode);
+  async findOneActiveSession(@Param('sessionCode') sessionCode: string) {
+    return await this.sessionService.findOneActiveSession(sessionCode);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSessionDto: UpdateSessionDto) {
-    return this.sessionService.update(+id, updateSessionDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.sessionService.remove(+id);
+  @Patch(':sessionCode/player/register')
+  async registerPlayer(
+    @Param('sessionCode') sessionCode: string,
+    @Body() registerPlayerDto: RegisterPlayerDto,
+  ) {
+    return await this.sessionService.registerPlayer(
+      sessionCode,
+      registerPlayerDto,
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { CreateSessionDto } from './dto/create-session.dto';
 import { UpdateSessionDto } from './dto/update-session.dto';
@@ -6,6 +6,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Session } from './schema/session.schema';
 import { JokeService } from 'src/joke/joke.service';
 import { isContext } from 'vm';
+import { RegisterPlayerDto } from './dto/register-player.dto';
 
 @Injectable()
 export class SessionService {
@@ -40,11 +41,7 @@ export class SessionService {
     });
   }
 
-  findAll() {
-    return `This action returns all session`;
-  }
-
-  async findOne(sessionCode: string) {
+  async findOneActiveSession(sessionCode: string) {
     console.log(`finding... ${sessionCode}`);
     return await this.sessionModel.findOne({
       sessionCode,
@@ -52,11 +49,28 @@ export class SessionService {
     });
   }
 
-  update(id: number, updateSessionDto: UpdateSessionDto) {
-    return `This action updates a #${id} session`;
-  }
+  async registerPlayer(
+    sessionCode: string,
+    registerPlayerDto: RegisterPlayerDto,
+  ) {
+    const session = await this.findOneActiveSession(sessionCode);
 
-  remove(id: number) {
-    return `This action removes a #${id} session`;
+    if (!session) {
+      throw new NotFoundException('Session not found');
+    }
+
+    const isPlayer1 = session.player1._id.equals(registerPlayerDto.playerId);
+    const isPlayer2 = session.player2._id.equals(registerPlayerDto.playerId);
+
+    if (!isPlayer1 && !isPlayer2) {
+      throw new NotFoundException('Players not found');
+    }
+
+    const player = isPlayer1 ? session.player1 : session.player2;
+
+    player.name = registerPlayerDto.name;
+
+    await session.save();
+    return session;
   }
 }
