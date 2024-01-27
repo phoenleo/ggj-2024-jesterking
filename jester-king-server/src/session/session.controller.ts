@@ -58,4 +58,12 @@ export class SessionController {
       punchline,
     );
   }
+
+  @Patch(':sessionCode/voter/submit-vote')
+  async votePlayer(
+    @Param('sessionCode') sessionCode: string,
+    @Body('votedPlayerId') votedPlayerId: string,
+  ) {
+    return await this.sessionService.submitVote(sessionCode, votedPlayerId);
+  }
 }

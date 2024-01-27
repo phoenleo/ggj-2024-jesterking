@@ -121,4 +121,18 @@ export class SessionService {
     await session.save();
     return session;
   }
+
+  async submitVote(sessionCode: string, votedPlayerId: string) {
+    const session = await this.findOneActiveSession(sessionCode);
+    const player = this.getPlayer(session, votedPlayerId);
+
+    if (!session.canVote) {
+      throw new BadRequestException('Cannot vote yet');
+    }
+
+    player.voteCount += 1;
+
+    await session.save();
+    return session;
+  }
 }
