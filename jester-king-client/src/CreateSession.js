@@ -5,48 +5,80 @@ import useAxios from 'axios-hooks';
 import ErrorModal from './utils/ErrorModal';
 import LoadingModal from './utils/LoadingModal';
 import Card from 'react-bootstrap/Card'
+import axiosClient from './apiClient';
 
 
 function CreateSession() {
-  const [sessionId, setSessionId] = useState([]);
+  const [sessionCode, setSessionCode] = useState([]);
   const navigate = useNavigate();
-  const gotoSpectator = () => navigate(`/session/${sessionId}/spectator/waiting-jesters`)
+  const gotoSpectator = () => navigate(`/session/${sessionCode}/spectator/waiting-jesters`)
 
-  const [errorRead, setErrorRead] = useState(false);
+  
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [session, setSession] = useState([]);
 
-  const [{ data, loading, error }] = useAxios({
-    url: '/session',
-    method: 'post'
-  }) 
+  const createSession = async () => {
+    setLoading(true)
+    const res = await axiosClient.post('/session')
+    console.log(res)
+    setSession(res.data)
+    setLoading(false)
+  }
 
-  if (loading) return (
-    <><LoadingModal show={loading}/></>
-  )
+  const getSession = async () => {
+    setLoading(true)
+    const res = await axiosClient.get(`/session/${session.sessionCode}`)
+    setSession(res.data)
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    createSession()
+  }, [])
+
+
+  if (loading) {
+    return <><LoadingModal show={loading}/></> 
+  } 
+
+  if (error) {
+    return (
+      <ErrorModal
+        show={error}
+        error={error} 
+        onHide={() => {
+          setError(null)
+        }}  
+      />
+    )
+  }  
 
   return (
     <div>
-      <ErrorModal
-        show={error && !errorRead}
-        error={error} 
-        onHide={() => {
-          setErrorRead(true)
-        }}  
-      />
-
-      <h1>Session Created: {data.sessionCode}</h1>
+      <h1>Session Created: {session.sessionCode}</h1>
       <Card>
         <Card.Body>
           <Card.Text>
-            { data.jokeSetup }
+            { session.jokeSetup }
           </Card.Text>
         </Card.Body>
       </Card>
 
       <h3>Waiting Jesters ...</h3>
       
-      <Button variant='primary' size='lg' onClick={gotoSpectator}>
-        Next
-      </Button>
+      {
+        session.canVote ?(
+          <Button variant='primary' size='lg' onClick={gotoSpectator}>
+            Next
+          </Button>
+        ) : (
+          <Button variant='primary' size='lg' onClick={getSession}>
+            Check
+          </Button>
+        )
+      }
+
     </div>
 
   )
