@@ -5,37 +5,26 @@ import useAxios from 'axios-hooks';
 import ErrorModal from './utils/ErrorModal';
 import LoadingModal from './utils/LoadingModal';
 import Card from 'react-bootstrap/Card'
-import axiosClient from './apiClient';
+import useStore from './store';
 
 
 function CreateSession() {
-  const [sessionCode, setSessionCode] = useState([]);
   const navigate = useNavigate();
-  const gotoSpectator = () => navigate(`/session/${sessionCode}/spectator/waiting-jesters`)
-
-  
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [session, setSession] = useState([]);
-
-  const createSession = async () => {
-    setLoading(true)
-    const res = await axiosClient.post('/session')
-    console.log(res)
-    setSession(res.data)
-    setLoading(false)
-  }
-
-  const getSession = async () => {
-    setLoading(true)
-    const res = await axiosClient.get(`/session/${session.sessionCode}`)
-    setSession(res.data)
-    setLoading(false)
-  }
+  const gotoSpectator = () => navigate(`/session/${session.sessionCode}/spectator/waiting-jesters`)
 
   useEffect(() => {
     createSession()
   }, [])
+
+  // Vars
+  const loading = useStore((state) => state.loading)
+  const error = useStore((state) => state.error)
+  const setError = useStore((state) => state.setError)
+  const session = useStore((state) => state.session)
+
+  // APIs
+  const createSession = useStore((state) => state.createSession)
+  const getSession = useStore((state) => state.getSession)
 
 
   if (loading) {
@@ -54,7 +43,7 @@ function CreateSession() {
     )
   }  
 
-  return (
+  return session && (
     <div>
       <h1>Session Created: {session.sessionCode}</h1>
       <Card>
@@ -73,7 +62,7 @@ function CreateSession() {
             Next
           </Button>
         ) : (
-          <Button variant='primary' size='lg' onClick={getSession}>
+          <Button variant='primary' size='lg' onClick={() => getSession(session.sessionCode)}>
             Check
           </Button>
         )
