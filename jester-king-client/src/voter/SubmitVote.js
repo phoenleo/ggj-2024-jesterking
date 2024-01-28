@@ -10,6 +10,9 @@ import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import whiteCard from '../img/white card.png';
 import greenCard from '../img/green card.png';
+import imgLogoMed from '../img/logo-med.png';
+import imgRuang from '../img/ruang.png';
+import Card from 'react-bootstrap/Card';
 
 function SubmitVote() {
   let { sessionId } = useParams()
@@ -42,22 +45,48 @@ function SubmitVote() {
 
   return session && (
     <div>
-      <p>Session: {sessionId}</p>
-      <p>VOTE Your Jesters</p>
-      <p>{ session.jokeSetup }</p>
+      <Image src={imgLogoMed} alt="Logo" height={80} className='mt-5' />
+      
+      <div className='img-container'>
+        <Image src={imgRuang} alt="room" height={50} className='mt-5' />
+        <div className='overlay'>
+          <p className='carnevalee text-color-dark'>Ruang {sessionId}</p>
+        </div>
+      </div>
+
+      <Card className='bg-transparent border-0 mt-3' text={"secondary" === 'light' ? 'dark' : 'white'}>
+        <Card.Body>
+          <Card.Text className="card-content">
+            <Image className='iot' src={greenCard} alt="Card(?)" rounded width="130" height="180" />
+            <span className="toi htwoert" style={{fontSize: '1.5em' }}>{ session.jokeSetup }</span>            
+          </Card.Text>
+        </Card.Body>
+      </Card>
+
+      
+      <h1 className='carnevalee text-color-light'>Pilih Badutmu</h1>
+      
     
       <Container>
-        <Row className="mt-5 mb-3">
-          <Col className='d-flex align-items-center justify-content-center'>
-            <Button variant="dark" size="lg" block onClick={selectPlayer1}>
-              <Image src={whiteCard} alt="Card 1" rounded width="130" height="180" />
-              { session.player1.selectedPunchline }
+        <Row>
+          <Col className='mt-2 mb-2 d-flex align-items-center justify-content-center'>
+            <Button className='bg-transparent' size="lg" onClick={selectPlayer1}>
+              <div class="stackParent position-relative">
+                <Image className='stack-Img' src={whiteCard} alt="Card 0" rounded width="130" height="150" />
+                <div class="stack-Txt position-absolute top-50 start-50 translate-middle">
+                  <div class="fourWsText stack-Txt-child carnevalee text-color-dark" style={{fontSize: '1.5rem' }}>{ session.player1.selectedPunchline }</div>
+                </div>
+              </div>
             </Button>
           </Col>
-          <Col className='d-flex align-items-center justify-content-center'>
-            <Button variant="dark" size="lg" block onClick={selectPlayer2}>
-              <Image src={whiteCard} alt="Card 1" rounded width="130" height="180" />
-              { session.player2.selectedPunchline }
+          <Col className='mt-2 mb-2 d-flex align-items-center justify-content-center'>
+            <Button className='bg-transparent' size="lg" onClick={selectPlayer2}>
+              <div class="stackParent position-relative">
+                <Image className='stack-Img' src={whiteCard} alt="Card 0" rounded width="130" height="150" />
+                <div class="stack-Txt position-absolute top-50 start-50 translate-middle">
+                  <div class="fourWsText stack-Txt-child carnevalee text-color-dark" style={{fontSize: '1.5rem' }}>{ session.player2.selectedPunchline }</div>
+                </div>
+              </div>
             </Button>
           </Col>
         </Row>
