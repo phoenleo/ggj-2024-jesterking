@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/esm/Container';
 
 function SpectatorWaitingJesters() {
   let { sessionId } = useParams()
@@ -11,9 +12,11 @@ function SpectatorWaitingJesters() {
       <p>Session: {sessionId}</p>
       <p>JOKE SETUP: Cita cita ___</p>
       <p>Waiting Jesters ...</p>
-      <Button variant='danger' size='lg' onClick={gotoWaitingVoters}>
-        Refresh
-      </Button>
+      <Container className='mt-5 mb-2 d-flex align-items-center justify-content-center'>
+        <Button variant='danger' size='lg' onClick={gotoWaitingVoters}>
+          Refresh
+        </Button>
+      </Container>
     </div>
   )
 }

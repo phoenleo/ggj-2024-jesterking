@@ -19,7 +19,7 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div>
       {/* Title */}
       {loading ? (
         <h1>Loading ...</h1>
@@ -28,7 +28,7 @@ function App() {
       )}
 
       <h2>Enter Session Code</h2>
-      <Form className="centered-form">
+      <Form className="d-flex align-items-center justify-content-center mt-4 mb-5">
         <Form.Control
           size="lg"
           type="text"
