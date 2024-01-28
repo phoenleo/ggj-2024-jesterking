@@ -4,14 +4,14 @@ import Button from 'react-bootstrap/Button'
 function WaitingVoters() {
   let { sessionId } = useParams()
   const navigate = useNavigate();
-  const gotoVoteResult = () => navigate('../vote-result')
+  const gotoNewSession = () => navigate('/')
 
   return (
     <div>
       <p>Session: {sessionId}</p>
-      <p>Waiting Voters</p>
-      <Button variant='danger' size='lg' onClick={gotoVoteResult}>
-        Refresh
+      <p>Thank You for Voting</p>
+      <Button variant='danger' size='lg' onClick={gotoNewSession}>
+        New Session
       </Button>
     </div>
   )
