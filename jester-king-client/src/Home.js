@@ -1,14 +1,13 @@
-import './App.scss';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import useAxios from 'axios-hooks'
-import ErrorModal from './utils/ErrorModal';
-import LoadingModal from './utils/LoadingModal';
+import useStore from './store';
 
 
-function App() {
+function Home() {
+  
   const navigate = useNavigate();
 
   const gotoPlayer = () => navigate(`../session/${sessionId}/player/register`);
@@ -16,22 +15,19 @@ function App() {
   const createNewSession = () => navigate(`/create-session`);
 
   const [sessionId, setSessionId] = useState([]);
-  const [errorRead, setErrorRead] = useState(false);
 
-  const [{ data: title, loading, error }] = useAxios('/')  
+  const [{ data: title, loading, error }, refetch] = useAxios('/')  
+  const setAppError = useStore((state) => state.setAppError)
+  const setLoading = useStore((state) => state.setLoading)
+
+  if (loading) {
+    console.log(loading)
+    setLoading(loading)
+  }
+  if (error) setAppError(error)
   
-  return (
-    <div>
-      <ErrorModal
-        show={error && !errorRead}
-        error={error} 
-        onHide={() => {
-          setErrorRead(true)
-        }}  
-      />
-
-      <LoadingModal show={loading}/>
-
+  return(
+    <>
       <h1>{title}</h1>
 
       <h2>Enter Session Code</h2>
@@ -62,8 +58,8 @@ function App() {
       <Button variant="danger" size="lg" onClick={createNewSession}>
         Create New Session
       </Button>
-    </div>
-  );
+    </>
+  )
 }
 
-export default App;
+export default Home
