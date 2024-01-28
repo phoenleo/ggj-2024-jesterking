@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import useAxios from 'axios-hooks'
+import ErrorModal from './utils/ErrorModal';
+import LoadingModal from './utils/LoadingModal';
 
 
 function App() {
@@ -14,18 +16,24 @@ function App() {
   const createNewSession = () => navigate(`/create-session`);
 
   const [sessionId, setSessionId] = useState([]);
+  const [errorRead, setErrorRead] = useState(false);
 
   const [{ data: title, loading, error }, refetch] = useAxios('/')  
-
-
+  
+  
   return (
     <div>
-      {/* Title */}
-      {loading ? (
-        <h1>Loading ...</h1>
-      ) : (
-        <h1>{title}</h1>
-      )}
+      <ErrorModal
+        show={error && !errorRead}
+        error={error} 
+        onHide={() => {
+          setErrorRead(true)
+        }}  
+      />
+
+      <LoadingModal show={loading}/>
+
+      <h1>{title}</h1>
 
       <h2>Enter Session Code</h2>
       <Form className="d-flex align-items-center justify-content-center mt-4 mb-5">
