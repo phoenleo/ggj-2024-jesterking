@@ -11,6 +11,8 @@ import { useEffect, useState } from 'react';
 import Image from 'react-bootstrap/Image';
 import jesterX from '../img/pemain1.png';
 import jesterY from '../img/pemain2.png';
+import imgLogoMed from '../img/logo-med.png';
+import imgRuang from '../img/ruang.png';
 
 function Register() {
   let { sessionId } = useParams()
@@ -61,29 +63,40 @@ function Register() {
 
   return session && (
     <div>
-      <p>Session: {sessionId}</p>
-      <p>Player Register</p>
-      <Form className='d-flex justify-content-center align-items-center'>
+      <Image src={imgLogoMed} alt="Logo" height={80} className='mt-5' />
+      
+      <div className='img-container'>
+        <Image src={imgRuang} alt="room" height={50} className='mt-5' />
+        <div className='overlay'>
+          <p className='carnevalee text-color-dark'>Ruang {sessionId}</p>
+        </div>
+      </div>
+      
+      <h2 className='htwoert text-color-light mt-5'>Masukkan nama anda</h2>
+      
+      <Form className='d-flex justify-content-center align-items-center ms-5 me-5'>
         <Form.Control
           size="lg"
           type="text"
-          placeholder="Anda ingin dikenal sebagai si- Carve your legacy here"
+          placeholder="Masukkan Nama"
           value={playerName}
           onChange={(e) => setPlayerName(e.target.value)}
-          style={{ width: '150px' }}
         />
       </Form>
+
+      <h2 className='htwoert text-color-light mt-5 mb-3'>Pilih posisi bermain</h2>
+
       <Container>
-        <Row className="mt-5 mb-3">
+        <Row>
           <Col></Col>
           <Col className='d-flex align-items-center justify-content-center'>
             <Button variant="danger" size="lg" block onClick={selectPlayer1}>
-              <Image src={jesterX} alt="Pemain 1" rounded width="180" height="275" />
+              <Image src={jesterX} alt="Pemain 1" rounded width="120" />
             </Button>
           </Col>
           <Col className='d-flex align-items-center justify-content-center'>
             <Button variant="dark" size="lg" block onClick={selectPlayer2}>
-              <Image src={jesterY} alt="Pemain 2" rounded width="180" height="275" />
+              <Image src={jesterY} alt="Pemain 2" rounded width="120" />
             </Button>
           </Col>
           <Col></Col>

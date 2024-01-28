@@ -1,8 +1,13 @@
 /* The following line can be included in a src/App.scss */
 @import '~bootstrap/scss/bootstrap';
 
+body > #root > div {
+  height: 100vh;
+}
+
 .App {
   text-align: center;
+  background-color: #8f1d1d;
 }
 
 .App-logo {
@@ -38,4 +43,57 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@font-face {
+  font-family: carnevalee;
+  src: url(./fonts/carnevalee-freakshow.ttf);
+}
+
+@font-face {
+  font-family: HTOWERT;
+  src: url(./fonts/HTOWERT.TTF);
+}
+
+.carnevalee {
+  font-family: carnevalee;
+  
+}
+
+.text-color-light {
+  color: #f0e8d5;
+}
+
+.text-color-dark {
+  color: #603813
+}
+
+.htwoert {
+  font-family: HTOWERT;
+}
+
+.text-image {
+  position: absolute; 
+  top: 50%;
+  left: 50%;
+}
+
+.img-container{
+  position:relative;
+  display:inline-block;
+}
+.img-container .overlay{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  opacity:1;
+}
+
+.overlay p{
+  position:absolute;
+  top:50%;
+  left:25%;
+  font-size: xx-large;
 }
