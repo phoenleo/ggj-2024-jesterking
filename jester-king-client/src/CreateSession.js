@@ -19,7 +19,7 @@ function CreateSession() {
   // Vars
   const loading = useStore((state) => state.loading)
   const error = useStore((state) => state.error)
-  const setError = useStore((state) => state.setError)
+  const clearError = useStore((state) => state.clearError)
   const session = useStore((state) => state.session)
 
   // APIs
@@ -36,9 +36,7 @@ function CreateSession() {
       <ErrorModal
         show={error}
         error={error} 
-        onHide={() => {
-          setError(null)
-        }}  
+        onHide={clearError}  
       />
     )
   }  

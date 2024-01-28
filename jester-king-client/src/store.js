@@ -9,6 +9,7 @@ const useStore = create(
     setError: (value) => set(() => ({ 
       error: value,
     })),
+    clearError: () => set({ error: null }),
   
     loading: false,
     setLoading: (value) => set(() => ({ loading: value})),
