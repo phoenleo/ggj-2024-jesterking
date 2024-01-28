@@ -11,9 +11,11 @@ function WaitingPlayer() {
     <div>
       <p>Session: {sessionId}</p>
       <p>Waiting Other Player</p>
-      <Button variant='danger' size='lg' onClick={gotoSubmitPunchline}>
-        Refresh
-      </Button>
+      <div className='mt-5 mb-2'>
+        <Button variant='danger' size='lg' onClick={gotoSubmitPunchline}>
+          Refresh
+        </Button>
+      </div>
     </div>
   )
 }

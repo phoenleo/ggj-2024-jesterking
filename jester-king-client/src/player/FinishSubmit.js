@@ -16,9 +16,11 @@ function FinishSubmit() {
         <li>Sampah Masyarakat</li>
       </ul>
 
-      <Button variant="danger" size="lg" onClick={gotoNewSession}>
-        New Session
-      </Button>
+      <div className='mt-2 mb-2'>
+        <Button variant="danger" size="lg" onClick={gotoNewSession}>
+          New Session
+        </Button>
+      </div>
     </div>
   )
 }

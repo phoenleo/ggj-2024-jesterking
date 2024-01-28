@@ -14,7 +14,7 @@ function Register() {
     <div>
       <p>Session: {sessionId}</p>
       <p>Player Register</p>
-      <Form class='d-flex justify-content-center align-items-center'>
+      <Form className='d-flex justify-content-center align-items-center'>
         <Form.Control
           size="lg"
           type="text"
@@ -24,19 +24,19 @@ function Register() {
       </Form>
       <Container>
         <Row className="mt-5 mb-3">
-          <Col xs={6} class='col-6 d-flex align-items-center justify-content-center'>
+          <Col className='d-flex align-items-center justify-content-center'>
             <Button variant="light" size="lg" block onClick={gotoWaitingPlayer}>
               As Jester X
             </Button>
           </Col>
-          <Col xs={6} class='col-6 d-flex align-items-center justify-content-center'>
+          <Col className='d-flex align-items-center justify-content-center'>
             <Button variant="dark" size="lg" block onClick={gotoWaitingPlayer}>
               As Jester Y
             </Button>
           </Col>
         </Row>
         <Row>
-          <Col class='d-flex align-items-center justify-content-center' xs={12}>
+          <Col className='d-flex align-items-center justify-content-center' xs={12}>
             <Button variant="danger" size="lg" block onClick={gotoWaitingPlayer}>
               Submit
             </Button>

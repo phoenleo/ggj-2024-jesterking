@@ -28,17 +28,17 @@ function SubmitPunchline() {
 
       <Container>
         <Row>
-          <Col>
+          <Col className='mt-2 mb-2 d-flex align-items-center justify-content-center'>
             <Button variant="success" size="lg" onClick={gotoFinishSubmit}>
               Sampah Masyarakat
             </Button>
           </Col>
-          <Col>
+          <Col className='mt-2 mb-2 d-flex align-items-center justify-content-center'>
             <Button variant="success" size="lg" onClick={gotoFinishSubmit}>
               Idol
             </Button>
           </Col>
-          <Col>
+          <Col className='mt-2 mb-2 d-flex align-items-center justify-content-center'>
             <Button variant="success" size="lg" onClick={gotoFinishSubmit}>
               Tukang Bangunan
             </Button>
@@ -46,10 +46,11 @@ function SubmitPunchline() {
         </Row>
       </Container>
       <br />
-      <Button variant="danger" size="lg" onClick={gotoFinishSubmit}>
-        Submit
-      </Button>
-
+      <div className='mt-3 mb-3'>
+        <Button variant="danger" size="lg" onClick={gotoFinishSubmit}>
+          Submit
+        </Button>
+      </div>
     </div>
   )
 }
