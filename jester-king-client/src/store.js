@@ -52,6 +52,16 @@ const useStore = create(
         set({ error: err, loading: false })
       }
     },
+    
+    getCompletedSession: async(sessionCode) => {
+      set({ loading: true })
+      try {
+        const res = await apiClient.get(`/session/${sessionCode}?completed=true`)
+        set({ loading: false, session: res.data })
+      } catch(err) {
+        set({ error: err, loading: false })
+      }
+    },
 
     registerPlayer: async(sessionCode, playerId, playerName) => {
       set({ loading: true })

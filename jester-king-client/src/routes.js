@@ -13,7 +13,7 @@ import VoteResult from "./voter/VoteResult";
 import VoteWinner from "./voter/VoteWinner";
 import CreateSession from "./CreateSession";
 import SpectatorWaitingJesters from "./spectator/SpectatorWaitingJesters";
-import SpectatorWaitingVoters from "./spectator/SpectatorWaitingVoters copy";
+import SpectatorWaitingVoters from "./spectator/SpectatorWaitingVoters";
 import ShowVoteResult from "./spectator/ShowVoteResult";
 import SpectatorVoteWinner from "./spectator/SpectatorVoteWinner";
 

@@ -1,20 +1,17 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import Button from 'react-bootstrap/Button';
+import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import useStore, { getPlayer } from '../store';
 import ErrorModal from '../utils/ErrorModal';
 import LoadingModal from '../utils/LoadingModal';
 import { useEffect, useState } from 'react';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
-
-function ShowVoteResult() {
-  const [showResult, setShowResult] = useState(false)
-
+function SpectatorWaitingVoters() {
   let { sessionId } = useParams()
   const navigate = useNavigate();
-  const gotoVoteWinner = () => navigate('../vote-winner')
+  const gotoShowVoteResult = () => navigate('../show-vote-result')
 
   // Vars
   const loading = useStore((state) => state.loading)
@@ -23,13 +20,18 @@ function ShowVoteResult() {
   const session = useStore((state) => state.session)
 
   // APIs
-  const getCompletedSession = useStore((state) => state.getCompletedSession)
+  const getSession = useStore((state) => state.getSession)
   const closeSession = useStore((state) => state.closeSession)
 
-  useEffect(() => {
-    getCompletedSession(sessionId)
-  }, [])
+  const submit = async() => {
+    await closeSession(sessionId)
+    gotoShowVoteResult()
+  }
 
+  useEffect(() => {
+    getSession(sessionId)
+  }, [])
+    
   return session && (
     <div>
       <p>Session: {sessionId}</p>
@@ -41,39 +43,21 @@ function ShowVoteResult() {
           <Col className='d-flex align-items-center justify-content-center'>
             <Button variant="dark" size="lg" block>
               { session.player1.selectedPunchline }
-              <br/>
-              {showResult ? `${session.player1.name}` : '???'}
-              <br/>
-              {showResult ? `${session.player1.voteCount}` : '???'} vote
             </Button>
           </Col>
           <Col className='d-flex align-items-center justify-content-center'>
             <Button variant="dark" size="lg" block>
               { session.player2.selectedPunchline }
-              <br/>
-              {showResult ? `${session.player2.name}` : '???'}
-              <br/>
-              {showResult ? `${session.player2.voteCount}` : '???'} vote
             </Button>
           </Col>
         </Row>
       </Container>
 
-      {
-        !showResult ?
-        (
-          <Button id='showVoteResult' variant='danger' size='lg' onClick={() => setShowResult(true)}>
-            Show Vote Result
-          </Button>
-        ) :
-        (
-          <Button id='next' variant='danger' size='lg' onClick={gotoVoteWinner}>
-            Next
-          </Button>
-        )
-      }
+      <Button variant="primary" size="lg" block onClick={submit}>
+        Close Vote
+      </Button>
     </div>
   )
 }
 
-export default ShowVoteResult;
+export default SpectatorWaitingVoters;
