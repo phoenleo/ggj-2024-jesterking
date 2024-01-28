@@ -3,6 +3,18 @@ import zustymiddleware from 'zustymiddleware';
 import apiClient from './apiClient'
 
 
+export const getPlayer = (session, playerId) => {
+  const isPlayer1 = session.player1._id === playerId;
+  const isPlayer2 = session.player2._id === playerId;
+
+  if (!isPlayer1 && !isPlayer2) {
+    throw Error('Player Not Found')
+  }
+
+  return isPlayer1 ? session.player1 : session.player2;
+}
+
+
 const useStore = create(
   zustymiddleware((set) => ({
     error: null,
@@ -16,6 +28,8 @@ const useStore = create(
 
     session: null,
     setSession: (value) => set(() => ({ session: value })),
+
+    punchlineOptions: [],
 
     // APIs
     createSession: async() => {
@@ -46,7 +60,11 @@ const useStore = create(
           `/session/${sessionCode}/player/${playerId}/register`, 
           { name: playerName }
         )
-        set({ loading: false, session: res.data })
+        
+        set({ 
+          loading: false, 
+          session: res.data, 
+        })
       } catch(err) {
         set({ error: err, loading: false })
       }

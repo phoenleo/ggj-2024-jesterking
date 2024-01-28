@@ -32,28 +32,17 @@ const routes = createBrowserRouter([
   {
     path: "session/:sessionId",
     children: [
-      
-      // Player/...
       {
-        path: "player",
-        children: [
-          {
-            path: "register",
-            element: <PlayerRegister />
-          },
-          {
-            path: "waiting-player",
-            element: <WaitingPlayer />
-          },
-          {
-            path: "submit-punchline",
-            element: <SubmitPunchline />
-          },
-          {
-            path: "finish-submit",
-            element: <FinishSubmit />
-          },
-        ]
+        path: "player/register",
+        element:  <PlayerRegister />
+      },
+      {
+        path: "player/:playerId/submit-punchline",
+        element: <SubmitPunchline />
+      },
+      {
+        path: "player/:playerId/finish-submit",
+        element: <FinishSubmit />
       },
 
       // Voter/...

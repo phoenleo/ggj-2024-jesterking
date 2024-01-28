@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 function Register() {
   let { sessionId } = useParams()
   const navigate = useNavigate();
-  const gotoWaitingPlayer = () => navigate('../waiting-player')
+  const gotoSubmitPunchline = (playerId) => navigate(`../player/${playerId}/submit-punchline`)
 
   const [playerName, setPlayerName] = useState('');
 
@@ -34,12 +34,12 @@ function Register() {
 
   const selectPlayer1 = async () => {
     await registerPlayer(sessionId, session.player1._id, playerName)
-    gotoWaitingPlayer()
+    gotoSubmitPunchline(session.player1._id)
   }
   
   const selectPlayer2 = async () => {
     await registerPlayer(sessionId, session.player2._id, playerName)
-    gotoWaitingPlayer()
+    gotoSubmitPunchline(session.player2._id)
   }
 
 
