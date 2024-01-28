@@ -8,7 +8,9 @@ import useStore from '../store';
 import ErrorModal from '../utils/ErrorModal';
 import LoadingModal from '../utils/LoadingModal';
 import { useEffect, useState } from 'react';
-
+import Image from 'react-bootstrap/Image';
+import jesterX from '../img/pemain1.png';
+import jesterY from '../img/pemain2.png';
 
 function Register() {
   let { sessionId } = useParams()
@@ -65,7 +67,7 @@ function Register() {
         <Form.Control
           size="lg"
           type="text"
-          placeholder="Carve your legacy here"
+          placeholder="Anda ingin dikenal sebagai si- Carve your legacy here"
           value={playerName}
           onChange={(e) => setPlayerName(e.target.value)}
           style={{ width: '150px' }}
@@ -73,16 +75,18 @@ function Register() {
       </Form>
       <Container>
         <Row className="mt-5 mb-3">
+          <Col></Col>
           <Col className='d-flex align-items-center justify-content-center'>
-            <Button variant="light" size="lg" block onClick={selectPlayer1}>
-              As Jester X
+            <Button variant="danger" size="lg" block onClick={selectPlayer1}>
+              <Image src={jesterX} alt="Pemain 1" rounded width="180" height="275" />
             </Button>
           </Col>
           <Col className='d-flex align-items-center justify-content-center'>
             <Button variant="dark" size="lg" block onClick={selectPlayer2}>
-              As Jester Y
+              <Image src={jesterY} alt="Pemain 2" rounded width="180" height="275" />
             </Button>
           </Col>
+          <Col></Col>
         </Row>
       </Container>
     </div>

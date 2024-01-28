@@ -53,21 +53,19 @@ function CreateSession() {
       </Card>
 
       <h3>Waiting Jesters ...</h3>
-      
+
       {
         session.canVote ?(
-          <Button variant='primary' size='lg' onClick={gotoSpectator}>
+          <Button variant='danger' size='lg' onClick={gotoSpectator}>
             Next
           </Button>
         ) : (
-          <Button variant='primary' size='lg' onClick={() => getSession(session.sessionCode)}>
+          <Button variant='danger' size='lg' onClick={() => getSession(session.sessionCode)}>
             Check
           </Button>
         )
       }
-
     </div>
-
   )
 }
 

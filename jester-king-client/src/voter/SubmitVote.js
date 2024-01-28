@@ -7,7 +7,9 @@ import { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import Image from 'react-bootstrap/Image';
+import whiteCard from '../img/white card.png';
+import greenCard from '../img/green card.png';
 
 function SubmitVote() {
   let { sessionId } = useParams()
@@ -48,12 +50,14 @@ function SubmitVote() {
         <Row className="mt-5 mb-3">
           <Col className='d-flex align-items-center justify-content-center'>
             <Button variant="dark" size="lg" block onClick={selectPlayer1}>
-            { session.player1.selectedPunchline }
+              <Image src={whiteCard} alt="Card 1" rounded width="130" height="180" />
+              { session.player1.selectedPunchline }
             </Button>
           </Col>
           <Col className='d-flex align-items-center justify-content-center'>
             <Button variant="dark" size="lg" block onClick={selectPlayer2}>
-            { session.player2.selectedPunchline }
+              <Image src={whiteCard} alt="Card 1" rounded width="130" height="180" />
+              { session.player2.selectedPunchline }
             </Button>
           </Col>
         </Row>
