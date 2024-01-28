@@ -1,9 +1,9 @@
 import './App.scss';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import useAxios from 'axios-hooks'
 
 
 function App() {
@@ -13,25 +13,15 @@ function App() {
   const gotoVoter = () => navigate(`../session/${sessionId}/voter/waiting-jesters`);
   const createNewSession = () => navigate(`/create-session`);
 
-  const [isLoading, setLoading] = useState(false);
-  const [title, setTitle] = useState([]);
   const [sessionId, setSessionId] = useState([]);
 
-  useEffect(() => {
-    const asyncLoadTitle = async () => {
-      setLoading(true);
-      const response = await axios.get('http://localhost:3000/api');
-      setTitle(response.data);
-      setLoading(false);
-    };
+  const [{ data: title, loading, error }, refetch] = useAxios('/')  
 
-    asyncLoadTitle();
-  }, []);
 
   return (
     <div className="App">
       {/* Title */}
-      {isLoading ? (
+      {loading ? (
         <h1>Loading ...</h1>
       ) : (
         <h1>{title}</h1>
