@@ -1,29 +1,48 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button'
+import useAxios from 'axios-hooks';
+import ErrorModal from './utils/ErrorModal';
+import LoadingModal from './utils/LoadingModal';
+import Card from 'react-bootstrap/Card'
+
 
 function CreateSession() {
   const [sessionId, setSessionId] = useState([]);
   const navigate = useNavigate();
   const gotoSpectator = () => navigate(`/session/${sessionId}/spectator/waiting-jesters`)
 
-  const createRandomSessionId = () => {
-    const min = 0
-    const max = 9999
-    return Math.floor(Math.random() * (max - min) ) + min;
-  }
+  const [errorRead, setErrorRead] = useState(false);
 
-  useEffect(() => {
-    const createSession = () => {
-      setSessionId(createRandomSessionId())
-    }
+  const [{ data, loading, error }] = useAxios({
+    url: '/session',
+    method: 'post'
+  }) 
 
-    createSession()
-  }, [])
+  if (loading) return (
+    <><LoadingModal show={loading}/></>
+  )
 
   return (
     <div>
-      <h1>Session Created: {sessionId}</h1>
+      <ErrorModal
+        show={error && !errorRead}
+        error={error} 
+        onHide={() => {
+          setErrorRead(true)
+        }}  
+      />
+
+      <h1>Session Created: {data.sessionCode}</h1>
+      <Card>
+        <Card.Body>
+          <Card.Text>
+            { data.jokeSetup }
+          </Card.Text>
+        </Card.Body>
+      </Card>
+
+      <h3>Waiting Jesters ...</h3>
       
       <Button variant='primary' size='lg' onClick={gotoSpectator}>
         Next
