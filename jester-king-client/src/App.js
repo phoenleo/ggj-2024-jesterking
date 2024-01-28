@@ -1,9 +1,11 @@
 import './App.scss';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import useAxios from 'axios-hooks'
+import ErrorModal from './utils/ErrorModal';
+import LoadingModal from './utils/LoadingModal';
 
 
 function App() {
@@ -13,29 +15,25 @@ function App() {
   const gotoVoter = () => navigate(`../session/${sessionId}/voter/waiting-jesters`);
   const createNewSession = () => navigate(`/create-session`);
 
-  const [isLoading, setLoading] = useState(false);
-  const [title, setTitle] = useState([]);
   const [sessionId, setSessionId] = useState([]);
+  const [errorRead, setErrorRead] = useState(false);
 
-  useEffect(() => {
-    const asyncLoadTitle = async () => {
-      setLoading(true);
-      const response = await axios.get('http://localhost:3000/api');
-      setTitle(response.data);
-      setLoading(false);
-    };
-
-    asyncLoadTitle();
-  }, []);
-
+  const [{ data: title, loading, error }, refetch] = useAxios('/')  
+  
+  
   return (
     <div>
-      {/* Title */}
-      {isLoading ? (
-        <h1>Loading ...</h1>
-      ) : (
-        <h1>{title}</h1>
-      )}
+      <ErrorModal
+        show={error && !errorRead}
+        error={error} 
+        onHide={() => {
+          setErrorRead(true)
+        }}  
+      />
+
+      <LoadingModal show={loading}/>
+
+      <h1>{title}</h1>
 
       <h2>Enter Session Code</h2>
       <Form className="d-flex align-items-center justify-content-center mt-4 mb-5">

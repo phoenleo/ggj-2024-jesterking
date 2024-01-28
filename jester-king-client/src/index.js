@@ -6,7 +6,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import routes from './routes'
+import { configure } from 'axios-hooks'
+import apiClient from './apiClient'
 
+configure({ axios: apiClient })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
