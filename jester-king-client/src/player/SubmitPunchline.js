@@ -13,6 +13,8 @@ import Image from 'react-bootstrap/Image';
 import whiteCard from '../img/white card.png';
 import greenCard from '../img/green card.png';
 import './player.styles.scss';
+import imgLogoMed from '../img/logo-med.png';
+import imgRuang from '../img/ruang.png';
 
 function SubmitPunchline() {
   let { sessionId, playerId } = useParams()
@@ -51,13 +53,20 @@ function SubmitPunchline() {
 
   return session && (
     <div>
-      <p>Session: {sessionId}</p>
-      <p>Submit Punchline</p>
-      <Card bg="secondary" text={"secondary" === 'light' ? 'dark' : 'white'}>
+      <Image src={imgLogoMed} alt="Logo" height={80} className='mt-5' />
+      
+      <div className='img-container'>
+        <Image src={imgRuang} alt="room" height={50} className='mt-5' />
+        <div className='overlay'>
+          <p className='carnevalee text-color-dark'>Ruang {sessionId}</p>
+        </div>
+      </div>
+
+      <Card className='bg-transparent border-0 mt-3' text={"secondary" === 'light' ? 'dark' : 'white'}>
         <Card.Body>
           <Card.Text className="card-content">
             <Image className='iot' src={greenCard} alt="Card(?)" rounded width="130" height="180" />
-            <span className="toi">{ session.jokeSetup }</span>            
+            <span className="toi htwoert" width='100' style={{fontSize: '1.5em' }}>{ session.jokeSetup }</span>            
           </Card.Text>
         </Card.Body>
       </Card>
@@ -65,37 +74,48 @@ function SubmitPunchline() {
       <Container>
         <Row>
           <Col className='mt-2 mb-2 d-flex align-items-center justify-content-center'>
-            <Button variant="light" size="lg" onClick={() => submit(punchlineOptions()[0])}>
-              <Image src={whiteCard} alt="Card 0" rounded width="130" height="180" />
-              { punchlineOptions()[0] }
+            <Button className='bg-transparent' size="lg" onClick={() => submit(punchlineOptions()[0])}>
+              <div class="stackParent position-relative">
+                <Image className='stack-Img' src={whiteCard} alt="Card 0" rounded width="130" height="150" />
+                <div class="stack-Txt position-absolute top-50 start-50 translate-middle">
+                  <div class="fourWsText stack-Txt-child carnevalee text-color-dark">{ punchlineOptions()[0] }</div>
+                </div>
+              </div>
             </Button>
           </Col>
           <Col className='mt-2 mb-2 d-flex align-items-center justify-content-center'>
-            <Button variant="light" size="lg" onClick={() => submit(punchlineOptions()[1])}>
-              <Image src={whiteCard} alt="Card 1" rounded width="130" height="180" />
-              { punchlineOptions()[1] }
+            <Button className='bg-transparent' size="lg" onClick={() => submit(punchlineOptions()[1])}>
+              <div class="stackParent position-relative">
+                <Image className='stack-Img' src={whiteCard} alt="Card 0" rounded width="130" height="150" />
+                <div class="stack-Txt position-absolute top-50 start-50 translate-middle">
+                  <div class="fourWsText stack-Txt-child carnevalee text-color-dark">{ punchlineOptions()[1] }</div>
+                </div>
+              </div>
             </Button>
           </Col>
           <Col className='mt-2 mb-2 d-flex align-items-center justify-content-center'>
-            <Button variant="light" size="lg" onClick={() => submit(punchlineOptions()[2])}>
-              <Image src={whiteCard} alt="Card 2" rounded width="130" height="180" />
-              { punchlineOptions()[2] }
+            <Button className='bg-transparent' size="lg" onClick={() => submit(punchlineOptions()[2])}>
+              <div class="stackParent position-relative">
+                <Image className='stack-Img' src={whiteCard} alt="Card 0" rounded width="130" height="150" />
+                <div class="stack-Txt position-absolute top-50 start-50 translate-middle">
+                  <div class="fourWsText stack-Txt-child carnevalee text-color-dark">{ punchlineOptions()[2] }</div>
+                </div>
+              </div>
             </Button>
           </Col>
           <Col className='mt-2 mb-2 d-flex align-items-center justify-content-center'>
-            <Button variant="light" size="lg" onClick={() => submit(punchlineOptions()[3])}>
-              <Image src={whiteCard} alt="Card 3" rounded width="130" height="180" />
-              { punchlineOptions()[3] }
+            <Button className='bg-transparent' size="lg" onClick={() => submit(punchlineOptions()[3])}>
+              <div class="stackParent position-relative">
+                <Image className='stack-Img' src={whiteCard} alt="Card 0" rounded width="130" height="150" />
+                <div class="stack-Txt position-absolute top-50 start-50 translate-middle">
+                  <div class="fourWsText stack-Txt-child carnevalee text-color-dark">{ punchlineOptions()[3] }</div>
+                </div>
+              </div>
             </Button>
           </Col>
         </Row>
       </Container>
       <br />
-      <div className='mt-3 mb-3'>
-        <Button variant="danger" size="lg" onClick={gotoFinishSubmit}>
-          Submit
-        </Button>
-      </div>
     </div>
   )
 }
