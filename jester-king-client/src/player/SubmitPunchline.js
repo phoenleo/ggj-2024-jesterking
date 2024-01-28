@@ -5,7 +5,10 @@ import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import Image from 'react-bootstrap/Image';
+import whiteCard from '../img/white card.png';
+import greenCard from '../img/green card.png';
+import './player.styles.scss';
 
 function SubmitPunchline() {
   let { sessionId } = useParams()
@@ -20,8 +23,9 @@ function SubmitPunchline() {
       <p>JOKE SETUP: Cita cita ___</p>
       <Card bg="secondary" text={"secondary" === 'light' ? 'dark' : 'white'}>
         <Card.Body>
-          <Card.Text>
-            Keren banget tuh sepatu. Pasti beli dari ____
+          <Card.Text className="card-content">
+            <Image className='iot' src={greenCard} alt="Card(?)" rounded width="130" height="180" />
+            <span className="toi">Keren banget tuh sepatu. Pasti beli dari ____</span>            
           </Card.Text>
         </Card.Body>
       </Card>
@@ -29,18 +33,18 @@ function SubmitPunchline() {
       <Container>
         <Row>
           <Col className='mt-2 mb-2 d-flex align-items-center justify-content-center'>
-            <Button variant="success" size="lg" onClick={gotoFinishSubmit}>
-              Sampah Masyarakat
+            <Button variant="light" size="lg" onClick={gotoFinishSubmit}>
+              <Image src={whiteCard} alt="Card 1" rounded width="130" height="180" rounded />
             </Button>
           </Col>
           <Col className='mt-2 mb-2 d-flex align-items-center justify-content-center'>
-            <Button variant="success" size="lg" onClick={gotoFinishSubmit}>
-              Idol
+            <Button variant="light" size="lg" onClick={gotoFinishSubmit}>
+              <Image src={whiteCard} alt="Card 2" rounded width="130" height="180" rounded />
             </Button>
           </Col>
           <Col className='mt-2 mb-2 d-flex align-items-center justify-content-center'>
-            <Button variant="success" size="lg" onClick={gotoFinishSubmit}>
-              Tukang Bangunan
+            <Button variant="light" size="lg" onClick={gotoFinishSubmit}>
+              <Image src={whiteCard} alt="Card 3" rounded width="130" height="180" rounded />
             </Button>
           </Col>
         </Row>

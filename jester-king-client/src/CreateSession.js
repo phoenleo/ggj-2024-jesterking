@@ -25,7 +25,7 @@ function CreateSession() {
     <div>
       <h1>Session Created: {sessionId}</h1>
       
-      <Button variant='primary' size='lg' onClick={gotoSpectator}>
+      <Button variant='danger' size='lg' onClick={gotoSpectator}>
         Next
       </Button>
     </div>

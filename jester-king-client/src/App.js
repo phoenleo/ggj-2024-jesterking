@@ -6,6 +6,14 @@ import Form from 'react-bootstrap/Form';
 import useAxios from 'axios-hooks'
 import ErrorModal from './utils/ErrorModal';
 import LoadingModal from './utils/LoadingModal';
+import Image from 'react-bootstrap/Image';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import imgPemain from './img/pemain.png';
+import imgVoter from './img/pemilih.png';
+import imgAdmin from './img/sesibaru.png';
+import imgLogo from './img/Logo big.png';
 
 
 function App() {
@@ -35,6 +43,8 @@ function App() {
 
       <h1>{title}</h1>
 
+      <Image src={imgLogo} alt="Logo" />
+
       <h2>Enter Session Code</h2>
       <Form className="d-flex align-items-center justify-content-center mt-4 mb-5">
         <Form.Control
@@ -47,22 +57,26 @@ function App() {
         />
       </Form>
       <br />
-
-      <Button variant="danger" size="lg" onClick={gotoPlayer}>
-        Join As Player
-      </Button>
-      <br />
-      <br />
-
-      <Button variant="danger" size="lg" onClick={gotoVoter}>
-        Join As Voter
-      </Button>
-      <br />
-      <br />
       
-      <Button variant="danger" size="lg" onClick={createNewSession}>
-        Create New Session
-      </Button>
+      <Container>
+        <Row>
+          <Col>
+            <Button variant="danger" size="lg" onClick={gotoPlayer}>
+              <Image src={imgPemain} alt="Join As Player" rounded width="180" height="270" rounded />
+            </Button>
+          </Col>
+          <Col>
+            <Button variant="danger" size="lg" onClick={gotoVoter}>
+              <Image src={imgVoter} alt="Join As Voter" rounded width="180" height="270" rounded />
+            </Button>
+          </Col>
+          <Col>
+            <Button variant="danger" size="lg" onClick={createNewSession}>
+              <Image src={imgAdmin} alt="Join As Admin" rounded width="180" height="270" rounded />
+            </Button>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }

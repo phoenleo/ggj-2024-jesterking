@@ -1,5 +1,11 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
+import whiteCard from '../img/white card.png';
+import greenCard from '../img/green card.png';
 
 function SubmitVote() {
   let { sessionId } = useParams()
@@ -12,13 +18,22 @@ function SubmitVote() {
       <p>Submit Punchline</p>
       <p>JOKE SETUP: Cita cita ___</p>
       <p>PUNCHLINE OPTIONS:</p>
-      <input type="radio" id="p_1" name="punchline" value="Sampah Masyarakat" />
-      <label for="p_1">Sampah Masyarakat</label>
-      <br />
-      <input type="radio" id="p_2" name="punchline" value="Idol" />
-      <label for="p_2">Idol</label>
-      <br />
-      
+
+      <Container>
+        <Row>
+          <Col>
+            <Button variant="light" size="lg" /*onClick={gotoFinishSubmit}*/>
+              <Image src={whiteCard} alt="Card 1" rounded width="130" height="180" rounded />
+            </Button>
+          </Col>
+          <Col>
+            <Button variant="light" size="lg" /*onClick={gotoFinishSubmit}*/>
+              <Image src={whiteCard} alt="Card 1" rounded width="130" height="180" rounded />
+            </Button>
+          </Col>
+        </Row>
+      </Container>
+      <br></br>
       <Button variant='danger' size='lg' onClick={gotoWaitingVoters}>
         Submit
       </Button>
